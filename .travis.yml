@@ -6,4 +6,4 @@ jdk:
 env:
   - PROJECT_DIR=hw1
 
-script: cd $PROJECT_DIR && ./gradlew check
+script: cd $PROJECT_DIR
