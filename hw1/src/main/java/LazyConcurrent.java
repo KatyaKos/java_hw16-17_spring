@@ -1,4 +1,4 @@
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
@@ -28,6 +28,7 @@ public class LazyConcurrent<T> extends AbstractLazy<T> {
             synchronized (this) {
                 if (result == none) {
                     result = supplier.get();
+                    supplier = null;
                 }
             }
         }
