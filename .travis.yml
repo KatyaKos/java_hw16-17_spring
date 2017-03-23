@@ -1,3 +1,7 @@
+branches:
+  only:
+    - /.*/
+
 language: java
 
 jdk:
@@ -6,4 +10,4 @@ jdk:
 env:
   - PROJECT_DIR=hw1
 
-script: cd $PROJECT_DIR
+script: cd $PROJECT_DIR && ./gradlew check
