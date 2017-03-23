@@ -4,6 +4,8 @@ branches:
 
 language: java
 
+os: windows
+
 jdk:
   - oraclejdk8
 
