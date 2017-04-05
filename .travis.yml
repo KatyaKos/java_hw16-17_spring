@@ -3,11 +3,10 @@ branches:
     - /.*/
 
 language: java
-
 jdk:
   - oraclejdk8
-
+os:
+  - windows
 env:
   - PROJECT_DIR=hw2
-
-script: cd $PROJECT_DIR && ./gradlew check
+script: cd $PROJECT_DIR && chmod +x ./gradlew && ./gradlew
