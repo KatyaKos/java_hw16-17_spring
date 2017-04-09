@@ -1,23 +1,24 @@
 group 'me.spbau.katyakos.hw16_17.java2'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 apply plugin: 'java'
+apply plugin: 'application'
 
-sourceCompatibility = 1.5
+mainClassName = "Application.Main"
 
-repositories {
-    mavenCentral()
+sourceCompatibility = 1.8
+
+task createJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'VCS application',
+                'Implementation-Version': version,
+                'Main-Class': 'Application.Main'
+    }
+    baseName = project.name + '-application'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-}
-group 'me.spbau.katyakos.java2'
-version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
-
-sourceCompatibility = 1.5
 
 repositories {
     mavenCentral()

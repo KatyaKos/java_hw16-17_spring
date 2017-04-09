@@ -51,6 +51,13 @@ class VCSTree extends VCSObject implements Serializable {
         return directoryName;
     }
 
+    /**
+     * Makes VCSTree equal to the VCSTree where the method was called with added file.
+     * @param path location of the file that we want to add
+     * @param hash hash of the file
+     * @return new VCSTree
+     * @throws IOException if IO went wrong
+     */
     VCSTree addPathToTree(@NotNull Path path, @NotNull String hash) throws IOException {
         if (path.getNameCount() == 0) {
             throw new IllegalArgumentException();
@@ -91,6 +98,12 @@ class VCSTree extends VCSObject implements Serializable {
         }
     }
 
+    /**
+     * Makes list of all paths to files contained in VCSTree, it's children and files' hashes.
+     * @param currentPath way to the root VCSTree
+     * @return list of pairs (path to file, it's hash)
+     * @throws IOException if IO went wrong
+     */
     List<VCSPair> checkoutTree(@NotNull Path currentPath) throws IOException {
         List<VCSPair> files = new ArrayList<>();
         for (String childHash : children) {

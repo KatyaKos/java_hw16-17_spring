@@ -26,6 +26,12 @@ abstract class VCSObject implements Serializable {
         return hash;
     }
 
+    /**
+     * Writes instance of VCSObject to file.
+     * @param object what to write
+     * @param path were to write
+     * @throws IOException if IO went wrong
+     */
     static void write(@NotNull VCSObject object, @NotNull Path path) throws IOException {
         OutputStream out;
         if (object.getType().equals(BRANCH)) {
@@ -39,6 +45,12 @@ abstract class VCSObject implements Serializable {
         out.close();
     }
 
+    /**
+     * Reads instance of VCSObject from file.
+     * @param path where to read from
+     * @return instance of VCSObject
+     * @throws IOException if IO went wrong
+     */
     static VCSObject read(@NotNull Path path) throws IOException {
         try {
             InputStream fileInputStream = Files.newInputStream(path);
