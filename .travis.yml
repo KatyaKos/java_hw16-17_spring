@@ -9,4 +9,4 @@ os:
   - windows
 env:
   - PROJECT_DIR=hw1
-script: cd $PROJECT_DIR && chmod +x ./gradlew && ./gradlew && check
+script: cd $PROJECT_DIR && chmod +x ./gradlew && ./gradlew check
