@@ -1,0 +1,4 @@
+/**
+ * Junit exceptions.
+ */
+package Exceptions;
