@@ -2,6 +2,7 @@ import Annotations.*;
 import Exceptions.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +37,9 @@ public class TestRunner {
      * @throws AfterClassException if something went wrong in @AfterClass method
      * @throws IllegalUsageException if annotations' usage is not correct
      */
-    public void testClass(@NotNull Class clazz) throws AfterException, BeforeException, BeforeClassException, AfterClassException, IllegalUsageException {
-        preparation(clazz);
+    public void testClass(@NotNull Class clazz)
+            throws AfterException, BeforeException, BeforeClassException, AfterClassException, IllegalUsageException, NoDefaultConstructorException {
+        prepare(clazz);
         runBeforeClassTests();
         runTests();
         runAfterClassTests();
@@ -48,22 +50,24 @@ public class TestRunner {
      * @param clazz class with methods
      * @throws IllegalUsageException if annotations' usage is not correct
      */
-    private void preparation(@NotNull Class clazz) throws IllegalUsageException {
+    private void prepare(@NotNull Class clazz) throws IllegalUsageException, NoDefaultConstructorException {
         Method[] methods = clazz.getDeclaredMethods();
         for (Method method : methods) {
-            if (method.isAnnotationPresent(Test.class) && (method.isAnnotationPresent(Before.class) || method.isAnnotationPresent(After.class) || method.isAnnotationPresent(BeforeClass.class) || method.isAnnotationPresent(AfterClass.class))) {
+            if (method.isAnnotationPresent(Test.class) && (method.isAnnotationPresent(Before.class)
+                    || method.isAnnotationPresent(After.class) || method.isAnnotationPresent(BeforeClass.class)
+                    || method.isAnnotationPresent(AfterClass.class))) {
                 throw new IllegalUsageException("incorrect annotation usage in " + method.getName());
             }
-            if (method.isAnnotationPresent(After.class)){
+            if (method.isAnnotationPresent(After.class)) {
                 afterMethods.add(method);
             }
-            if (method.isAnnotationPresent(Before.class)){
+            if (method.isAnnotationPresent(Before.class) ){
                 beforeMethods.add(method);
             }
-            if (method.isAnnotationPresent(AfterClass.class)){
+            if (method.isAnnotationPresent(AfterClass.class)) {
                 afterClassMethods.add(method);
             }
-            if (method.isAnnotationPresent(BeforeClass.class)){
+            if (method.isAnnotationPresent(BeforeClass.class)) {
                 beforeClassMethods.add(method);
             }
             if (method.isAnnotationPresent(Test.class)) {
@@ -75,10 +79,11 @@ public class TestRunner {
                 }
             }
         }
+
         try {
             instance = clazz.getConstructor().newInstance();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new NoDefaultConstructorException();
         }
     }
 

@@ -4,9 +4,9 @@ import org.jetbrains.annotations.NotNull;
  * Report to the test.
  */
 public class TestReporter {
-    private String testName;
-    private String result;
-    private long time;
+    private final String testName;
+    private final String result;
+    private final long time;
 
     public TestReporter(@NotNull String testName, @NotNull String result, long time) {
         this.testName = testName;
@@ -20,10 +20,18 @@ public class TestReporter {
         this.time = -1;
     }
 
+    /**
+     * Returns name of the test.
+     * @return name
+     */
     public String getTestName() {
         return testName;
     }
 
+    /**
+     * Returns result of the test.
+     * @return result
+     */
     public String getResult() {
         return result;
     }
