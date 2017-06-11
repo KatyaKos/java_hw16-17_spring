@@ -1,0 +1,16 @@
+group 'ru.spbau.katyakos.hw16-17.java2.hw5'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'org.jetbrains', name: 'annotations', version: '13.0'
+    testCompile "org.mockito:mockito-core:2.+"
+}
