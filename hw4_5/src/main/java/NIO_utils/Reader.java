@@ -52,8 +52,9 @@ public class Reader {
      * @return data in byte array
      */
     public byte[] getData() {
-        if (data == null)
+        if (data == null) {
             return null;
+        }
         return Arrays.copyOf(data, position);
     }
 }

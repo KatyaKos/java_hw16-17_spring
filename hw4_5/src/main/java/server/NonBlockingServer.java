@@ -1,9 +1,5 @@
 package server;
 
-/**
- * Created by KatyaKos on 27.04.2017.
- */
-
 import NIO_utils.Reader;
 import NIO_utils.Writer;
 
@@ -19,9 +15,13 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * This class lass represents simple ftp nonblocking server.
+ * It has two types of requests: list files in specified directory and get specified file.
+ */
 public class NonBlockingServer implements Server {
-    private int port;
-    private SocketAddress PORT;
+    private final int port;
+    private final SocketAddress PORT;
     private Selector selector;
 
     private List<Request> processNeeded = new LinkedList<>();

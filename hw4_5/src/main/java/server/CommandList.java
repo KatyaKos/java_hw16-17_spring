@@ -1,6 +1,7 @@
 package server;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -19,7 +20,7 @@ public class CommandList implements Command{
      * @return list of files
      */
     @Override
-    public byte[] execute(@NotNull Path path) {
+    public @Nullable byte[] execute(@NotNull Path path) {
         if (!Files.exists(path) || !Files.isDirectory(path)) {
             return null;
         }

@@ -17,6 +17,8 @@ public class GuiApplication extends Application {
     public void start(@NotNull Stage primaryStage) {
         primaryStage.setTitle("FTP client");
         primaryStage.setScene(new SceneBuilder(primaryStage).getScene());
+        primaryStage.setResizable(false);
+        primaryStage.sizeToScene();
         primaryStage.show();
     }
 }

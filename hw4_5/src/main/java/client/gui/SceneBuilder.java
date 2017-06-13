@@ -33,7 +33,7 @@ class SceneBuilder {
     private final String BACKGROUND_COLOR = "-fx-background-color: #f6e3ce";
     private final String FIELD_BACKGROUND_COLOR = "-fx-control-inner-background: #deecf2";
 
-    Stage stage;
+    private final Stage stage;
 
     SceneBuilder(@NotNull Stage stage) {
         this.stage = stage;

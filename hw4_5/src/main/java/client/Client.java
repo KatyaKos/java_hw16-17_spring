@@ -32,14 +32,15 @@ public class Client {
      * @param path directory
      * @return list of files
      */
-    public List<String> executeList(String path) {
+    public List<String> executeList(@NotNull String path) {
         byte[] content = interactWithServer(listCode, path);
-        List <String> newContent = new ArrayList<>();
+        List<String> newContent = new ArrayList<>();
         if (content == null) {
             newContent.add(Integer.toString(0));
             return newContent;
         }
-        try (ByteArrayInputStream byteStream = new ByteArrayInputStream(content); DataInputStream inputStream = new DataInputStream(byteStream)) {
+        try (ByteArrayInputStream byteStream = new ByteArrayInputStream(content);
+             DataInputStream inputStream = new DataInputStream(byteStream)) {
             int size = inputStream.readInt();
             while (size > 0) {
                 size--;
@@ -59,9 +60,7 @@ public class Client {
     public void executeGet(@NotNull String path, @NotNull String pathToWrite) {
         byte[] content = interactWithServer(getCode, path);
         try {
-            if (content == null || Arrays.equals(content, new byte[0])) {
-                Files.write(Paths.get(pathToWrite), Long.toString(0).getBytes());
-            } else {
+            if (content != null && !Arrays.equals(content, new byte[0])) {
                 Files.write(Paths.get(pathToWrite), Long.toString(content.length).getBytes());
                 Files.write(Paths.get(pathToWrite), "\n".getBytes());
                 Files.write(Paths.get(pathToWrite), content);
