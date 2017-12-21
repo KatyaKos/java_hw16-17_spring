@@ -4,8 +4,7 @@ pipeline {
 		stage('build') {
 			steps {
 				sh 'cd hw1'
-				sh 'chmod +x ./gradlew'
-				sh './gradlew build'
+				sh 'gradle build'
 			}
 		}
 	}
